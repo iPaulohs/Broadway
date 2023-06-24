@@ -39,7 +39,7 @@ export default function Carroussel({ titulo, url }) {
               key={filme.id}
               tituloFilme={filme.title || filme.name}
               src={`https://image.tmdb.org/t/p/original${filme.poster_path}`}
-              filmeId={filme.id}
+              id={filme.id}
             />
           ))}
       </ContainerPosters>

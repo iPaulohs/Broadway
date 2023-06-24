@@ -49,7 +49,9 @@ export default function Busca() {
           {results.map((filme) => (
             <ItemCarroussel
               key={filme.id}
+              tituloFilme={filme.title || filme.name}
               src={`https://image.tmdb.org/t/p/original${filme.poster_path}`}
+              id={filme.id}
             />
           ))}
         </DivResults>
@@ -72,6 +74,7 @@ const DivInput = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 2rem 0 2rem 0;
 `
 
 const DivLogo = styled.div`
@@ -88,7 +91,7 @@ const DivResults = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem 1rem;
+  gap: 4.5rem 1rem;
   padding: 2rem;
 `
 
@@ -110,4 +113,5 @@ const Input = styled.input`
   font-family: var(--Stat);
   text-transform: uppercase;
   text-align: center;
+  margin: 1rem 0 0 0;
 `

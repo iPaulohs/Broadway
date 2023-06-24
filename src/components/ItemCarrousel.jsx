@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 
-export default function ItemCarroussel({ src, tituloFilme, numb, margin }) {
+export default function ItemCarroussel({ src, tituloFilme, numb, margin, id }) {
   return (
+    <ContainerLink to={`/movie/${id}`}>
     <Container>
       <Number>{numb}</Number>
       <ContainerExterno margin={margin}>
@@ -11,8 +13,14 @@ export default function ItemCarroussel({ src, tituloFilme, numb, margin }) {
         </ContainerInterno>
       </ContainerExterno>
     </Container>
+    </ContainerLink>
   );
 }
+
+const ContainerLink = styled(Link)`
+text-decoration: none;
+color: #fff;
+`
 
 const Container = styled.div`
   display: flex;
@@ -60,4 +68,5 @@ const TituloFilme = styled.p`
   text-align: center;
   margin: 10% 0;
   font-family: var(--Stat);
+  width: 110%;
 `;

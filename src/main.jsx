@@ -6,6 +6,6 @@ import MovieDetails from "./components/Movie.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MovieDetails />
+    <App />
   </React.StrictMode>
 );

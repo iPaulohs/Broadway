@@ -40,6 +40,7 @@ export default function CarrousselTD({ url, titulo }) {
                 numb={index + 1}
                 tituloFilme={filme.title || filme.name}
                 src={`https://image.tmdb.org/t/p/original${filme.poster_path}`}
+                id={filme.id}
               />
           ))}
       </ContainerPosters>
