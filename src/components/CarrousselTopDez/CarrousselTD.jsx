@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useState, useEffect } from "react"
 import ItemCarroussel from "../ItemCarrousel"
+import Skeleton from "../Skeleton"
 
 export default function CarrousselTD({ url, titulo }) {
   const [filmes, setFilmes] = useState([])
@@ -29,6 +30,8 @@ export default function CarrousselTD({ url, titulo }) {
   }, [url])
 
   return (
+    <>
+    { carregado ? (
     <Container>
       <Titulo>{titulo}</Titulo>
       <ContainerPosters>
@@ -45,6 +48,11 @@ export default function CarrousselTD({ url, titulo }) {
           ))}
       </ContainerPosters>
     </Container>
+    ) : (
+      <Skeleton />
+    )
+    }
+    </>
   )
 }
 

@@ -1,31 +1,32 @@
-import { styled } from "styled-components";
-import { Link } from "react-router-dom";
+import { styled } from "styled-components"
+import { Link } from "react-router-dom"
+import breakpoints from "../utils/MediaQueries"
 
 export default function ItemCarroussel({ src, tituloFilme, numb, margin, id }) {
   return (
     <ContainerLink to={`/movie/${id}`}>
-    <Container>
-      <Number>{numb}</Number>
-      <ContainerExterno margin={margin}>
-        <ContainerInterno>
-          <Poster src={src} />
-          <TituloFilme>{tituloFilme}</TituloFilme>
-        </ContainerInterno>
-      </ContainerExterno>
-    </Container>
+      <Container>
+        <Number>{numb}</Number>
+        <ContainerExterno margin={margin}>
+          <ContainerInterno>
+            <Poster src={src} />
+            <TituloFilme>{tituloFilme}</TituloFilme>
+          </ContainerInterno>
+        </ContainerExterno>
+      </Container>
     </ContainerLink>
-  );
+  )
 }
 
 const ContainerLink = styled(Link)`
-text-decoration: none;
-color: #fff;
+  text-decoration: none;
+  color: #fff;
 `
 
 const Container = styled.div`
   display: flex;
   align-items: baseline;
-`;
+`
 
 const Number = styled.h1`
   font-size: 10rem;
@@ -35,7 +36,7 @@ const Number = styled.h1`
   -webkit-text-stroke: 0.01px #fff;
   margin: 0 -3% 0 0;
   z-index: 1;
-`;
+`
 
 const ContainerExterno = styled.div`
   width: 10.625rem;
@@ -46,8 +47,12 @@ const ContainerExterno = styled.div`
   background-color: #fff;
   box-shadow: 0 0 0 2px red, 0 0 0 4px #860000, 0 0 0 6px #fff;
   border: 1px solid red;
-  margin-right: 2rem;
-`;
+
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+    width: 8.5rem;
+    height: 13rem;
+  }
+`
 
 const ContainerInterno = styled.div`
   position: relative;
@@ -57,16 +62,16 @@ const ContainerInterno = styled.div`
   height: 99.5%;
   background-color: #000;
   border: 1px solid #fff;
-`;
+`
 
 const Poster = styled.img`
   width: 100%;
   height: 100%;
-`;
+`
 
 const TituloFilme = styled.p`
   text-align: center;
   margin: 10% 0;
   font-family: var(--Stat);
   width: 110%;
-`;
+`

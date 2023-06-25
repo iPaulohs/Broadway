@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import LogoMobile from "/logoMobile.png"
 import LogoDesktop from "/logoDesktop.png"
-import { List } from "@phosphor-icons/react"
+import { MagnifyingGlass } from "@phosphor-icons/react"
 import { useMediaQuery } from "react-responsive"
 import { Link } from "react-router-dom"
+import breakpoints from '../utils/MediaQueries'
 
 export default function Header() {
   const isMobile = useMediaQuery({ query: "(max-width: 844px)" })
@@ -14,7 +15,9 @@ export default function Header() {
         <Logo src={isMobile ? LogoMobile : LogoDesktop} />
       </LogoLinkContainer>
       {isMobile ? (
-        <BurguerMenu size={32} color={"#FAFAFA"} />
+        <LinkListItem to="/search">
+          <Search size={32} color={"#FAFAFA"} />
+        </LinkListItem>
       ) : (
         <ContainerList>
           <LinkListItem to="/search">
@@ -34,6 +37,8 @@ const Container = styled.header`
   align-items: center;
   margin-bottom: 2%;
   box-sizing: border-box !important;
+
+
 `
 
 const Logo = styled.img`
@@ -64,8 +69,15 @@ const LinkListItem = styled(Link)`
   font-size: 1.5rem;
 `
 
-const BurguerMenu = styled(List)`
+const Search = styled(MagnifyingGlass)`
   display: inline;
   position: relative;
-  left: 65%;
+
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+    left: 250px;
+  }
+
+  @media (min-width: ${breakpoints.iPads.minW}) and (max-width: ${breakpoints.iPads.maxW}) {
+    left: 570px;
+  }
 `

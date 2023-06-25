@@ -3,6 +3,7 @@ import styled from "styled-components"
 import LogoDesktop from "/Broadway3.png"
 import { useState, useEffect } from "react"
 import ItemCarroussel from "../components/ItemCarrousel"
+import breakpoints from "../utils/MediaQueries"
 
 export default function Busca() {
   const [searchText, setSearchText] = useState("")
@@ -32,7 +33,7 @@ export default function Busca() {
   }, [searchText])
 
   return (
-    <>
+    <Container>
       <DivInput>
         <Titulo>Busque por um título</Titulo>
         <Input
@@ -56,15 +57,32 @@ export default function Busca() {
           ))}
         </DivResults>
       )}
-    </>
+    </Container>
   )
 }
 
+const Container = styled.div`
+min-height: 75vh;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`
+
 const Titulo = styled.h2`
   font-family: var(--Montserrat);
-  font-size: 2rem;
+  font-size: 3rem;
   color: #fff;
   margin: 1rem 0;
+  text-align: center;
+
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: ${breakpoints.iPads.minW}) and (max-width: ${breakpoints.iPads.maxW}) {
+    font-size: 3rem;
+  }
 `
 
 const DivInput = styled.div`
@@ -74,7 +92,7 @@ const DivInput = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 2rem 0 2rem 0;
+  margin: 2rem 0 5rem 0;
 `
 
 const DivLogo = styled.div`
@@ -87,18 +105,40 @@ const DivLogo = styled.div`
 `
 
 const DivResults = styled.div`
-  width: 90vw;
-  margin: 0 auto;
+  width: 100vw;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 4.5rem 1rem;
-  padding: 2rem;
+  position: relative;
+  left: 70px;
+
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+  grid-template-columns: repeat(2, 1fr);
+    left: 25px;
+  }
+
+  @media (min-width: ${breakpoints.iPads.minW}) and (max-width: ${breakpoints.iPads.maxW}) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `
 
 const LogoG = styled.img`
   margin: auto auto;
-  width: 30%;
+  width: 50%;
   filter: grayscale(1);
+
+  
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+    width: 130%;
+    position: relative;
+    right: 15px;
+    top: 20px;
+  }
+
+  @media (min-width: ${breakpoints.iPads.minW}) and (max-width: ${breakpoints.iPads.maxW}) {
+    width: 110%;
+  }
+  
 `
 
 const Input = styled.input`
@@ -114,4 +154,12 @@ const Input = styled.input`
   text-transform: uppercase;
   text-align: center;
   margin: 1rem 0 0 0;
+
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+    width: 75vw;
+  }
+
+  @media (min-width: ${breakpoints.iPads.minW}) and (max-width: ${breakpoints.iPads.maxW}) {
+    width: 60vw;
+  }
 `
