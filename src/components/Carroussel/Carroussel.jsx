@@ -25,7 +25,7 @@ export default function Carroussel({ titulo, url }) {
           (filme) => filme.poster_path !== null
         );
         setFilmes(filmesFiltrados);
-        //setCarregado(true);
+        setCarregado(true);
         console.log(data);
       })
       .catch((error) => console.error("error:" + error));
