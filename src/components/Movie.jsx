@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import breakpoints from "../utils/MediaQueries"
 import { useMediaQuery } from "react-responsive"
+import { Skeleton } from "@mui/material"
 
 export default function MovieDetails() {
   const params = useParams()
@@ -11,6 +12,7 @@ export default function MovieDetails() {
   const [generos, setGeneros] = useState([])
   const [classificacao, setClassificacao] = useState("")
   const [endereco, setEndereco] = useState(null)
+  const [carregado, setCarregado] = useState(false)
 
   const isMobile = useMediaQuery({ query: "(max-width: 844px)" })
 
@@ -134,10 +136,16 @@ export default function MovieDetails() {
         break
     }
 
-    console.log(endereco)
+    
+
+    const setCarregadoAfter = () => setTimeout(setCarregado(true), 2000)
+    setCarregadoAfter()
   }, [classificacao])
 
   return (
+    <>
+    {
+    carregado ?
     <>
       {!isMobile ? (
         <Container>
@@ -151,7 +159,6 @@ export default function MovieDetails() {
               <Classificacao size="0.8">
                 {filme.release_date} | 1h:32m | {renderGenres()}
               </Classificacao>
-
               {endereco}
               <TituloSinopse size={1.5} weight="800">
                 Sinopse:
@@ -164,11 +171,8 @@ export default function MovieDetails() {
         </Container>
       ) : (
         <Container>
-          <ContainerPoster
-            backdropUrl={`https://image.tmdb.org/t/p/original/${filme.backdrop_path}`}>
-            <Poster
-              src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`}
-            />
+            <ContainerPoster backdropUrl={`https://image.tmdb.org/t/p/original/${filme.backdrop_path}`}>
+            <Poster src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`}/>
           </ContainerPoster>
           <ContainerInfo>
             <Titulo>{filme.title}</Titulo>
@@ -186,8 +190,22 @@ export default function MovieDetails() {
         </Container>
       )}
     </>
+    :
+    <Container>
+      <SkeletonContainer />
+    </Container>
+      }
+    </>
   )
 }
+
+const SkeletonContainer = styled(Skeleton).attrs((props) => ({
+  sx: { bgcolor: "grey.900" },
+  variant: "rectangular",
+  height: "90vh",
+  width: "80vw",
+  ...props,
+}))``;
 
 const ClassificacaoEtaria = styled.img``
 
@@ -227,6 +245,10 @@ const Titulo = styled.h1`
   font-family: var(--Montserrat);
   text-align: center;
   margin: 2rem 0 0 0;
+
+  @media (min-width: ${breakpoints.iPhones.minW}) and (max-width: ${breakpoints.iPhones.maxW}) {
+    font-size: 1.5rem;
+  }
 `
 
 const Classificacao = styled.h4`

@@ -1,13 +1,12 @@
-import { styled } from "styled-components"
-import ItemCarroussel from "../ItemCarrousel"
-import { useEffect, useState } from "react"
-import breakpoints from "../../utils/MediaQueries"
-import Skeleton from "../Skeleton"
-
+import { styled } from "styled-components";
+import ItemCarroussel from "../ItemCarrousel";
+import { useEffect, useState } from "react";
+import breakpoints from "../../utils/MediaQueries";
+import Skeleton from "../Skeleton/SkeletonCarroussel";
 
 export default function Carroussel({ titulo, url }) {
-  const [filmes, setFilmes] = useState([])
-  const [carregado, setCarregado] = useState(false)
+  const [filmes, setFilmes] = useState([]);
+  const [carregado, setCarregado] = useState(false);
 
   useEffect(() => {
     const options = {
@@ -17,20 +16,20 @@ export default function Carroussel({ titulo, url }) {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTRmZTUzNjg2MzE1NzViZDc4NTZjMzU2YTcxZDI2NSIsInN1YiI6IjYzZWVhZTBjN2NmZmRhMDA4ZWMxNTYyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zp6musWyqQg0bV_1Od0gYxOnwpayjq3iaEbi2c-cgdU",
       },
-    }
+    };
 
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
         const filmesFiltrados = data.results.filter(
           (filme) => filme.poster_path !== null
-        )
-        setFilmes(filmesFiltrados)
-        setCarregado(true)
-        console.log(data)
+        );
+        setFilmes(filmesFiltrados);
+        //setCarregado(true);
+        console.log(data);
       })
-      .catch((error) => console.error("error:" + error))
-  }, [url])
+      .catch((error) => console.error("error:" + error));
+  }, [url]);
 
   return (
     <>
@@ -53,10 +52,8 @@ export default function Carroussel({ titulo, url }) {
         <Skeleton />
       )}
     </>
-  )
+  );
 }
-
-
 
 const Container = styled.div`
   width: 100vw;
@@ -68,9 +65,7 @@ const Container = styled.div`
   @media (min-width: ${breakpoints.iPads.minW}) and (max-width: ${breakpoints.iPads.maxW}) {
     margin: 0 1rem;
   }
-`
-
-
+`;
 
 const ContainerPosters = styled.div`
   width: 100%;
@@ -90,7 +85,7 @@ const ContainerPosters = styled.div`
     background-color: #fff;
     border-radius: 5px;
   }
-`
+`;
 
 const Titulo = styled.h2`
   font-family: var(--Montserrat);
@@ -98,6 +93,4 @@ const Titulo = styled.h2`
   color: #fff;
   margin: 1rem 0 0 1.5rem;
   width: fit-content;
-`
-
-
+`;
